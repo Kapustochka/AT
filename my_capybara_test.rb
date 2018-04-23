@@ -10,7 +10,7 @@ module MyCapybaraTest
 
     def check_current_uri(url)
       curr_uri = URI.parse(current_url).to_s
-      p curr_uri
+      # p curr_uri
       raise 'Current page is not that expected' unless curr_uri == url
     end
 

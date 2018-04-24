@@ -19,7 +19,7 @@ class Tests
     @b.goto('http://demoapp.strongqa.com/users/sign_in')
     test_login('admin@strongqa.com', '1234567890')
     @b.send_keys :enter
-    ## TODO:
+    ## TODO: Implement without sleep
     sleep 2
     raise 'Wrong URI' unless @b.url == 'http://demoapp.strongqa.com/'
     raise '"Signed successfully" record wasn\'t found' unless

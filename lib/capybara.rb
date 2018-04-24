@@ -20,7 +20,7 @@ class Tests
   alias open_page_via_menu tc_01
   def tc_02
     @t.visit('/users/sign_in')
-    @t.test_login('maximkalavrenenko@gmail.com', '12345678')
+    @t.test_login('admin@strongqa.com', '1234567890')
     @t.click_enter('#user_password')
     @t.check_current_uri('http://demoapp.strongqa.com/')
     raise '"Signed successfully" record wasn\'t found' unless
@@ -30,7 +30,7 @@ class Tests
   alias login_with_correct_creds tc_02
   def tc_03_01
     @t.visit('/users/sign_in')
-    @t.test_login('maximkalavrenenko@gmail.com', '12345678')
+    @t.test_login('admin@strongqa.com', '1234567890')
     @t.check('Remember me')
     @t.click_enter('#user_password')
     raise '"Signed successfully" record wasn\'t found' unless
@@ -57,7 +57,7 @@ class Tests
   alias login_rememb_creds_p3 tc_03_03
   def tc_04_01
     @t.visit('/users/sign_in')
-    @t.test_login('maximkalavrenenko@gmail.com', '')
+    @t.test_login('admin@strongqa.com', '')
     @t.click_enter('#user_password')
     raise 'User loggined without password' unless
     @t.find('#flash_alert').text == 'Invalid email or password.'
@@ -81,7 +81,7 @@ class Tests
   alias prohib_log_without_creds tc_04_03
   def tc_05_01
     @t.visit('/users/sign_in')
-    @t.test_login('smaximkalavrenenko@gmail.com', '12345678')
+    @t.test_login('smaximkalavrenenko@gmail.com', '1234567890')
     @t.click_enter('#user_password')
     raise 'User loggined with wrong mail' unless
     @t.find('#flash_alert').text == 'Invalid email or password.'
@@ -89,7 +89,7 @@ class Tests
   alias prohib_log_with_inc_mail tc_05_01
   def tc_05_02
     @t.visit('/users/sign_in')
-    @t.test_login('maximkalavrenenko@gmail.com', '123456789')
+    @t.test_login('admin@strongqa.com', '123456789')
     @t.click_enter('#user_password')
     raise 'User loggined with wrong password' unless
     @t.find('#flash_alert').text == 'Invalid email or password.'

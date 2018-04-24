@@ -1,4 +1,4 @@
-require_relative 'capybara'
+require_relative 'lib/capybara'
 
 test = Tests.new
 test.open_page_via_menu

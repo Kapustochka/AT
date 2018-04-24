@@ -9,6 +9,8 @@ module MyCapybaraTest
     end
 
     def check_current_uri(url)
+      # TODO: Implemen waiting without sleep
+      sleep 2
       curr_uri = URI.parse(current_url).to_s
       # p curr_uri
       raise 'Current page is not that expected' unless curr_uri == url
@@ -16,8 +18,6 @@ module MyCapybaraTest
 
     def click_enter(css_selector)
       find(css_selector).native.send_keys(:return)
-      ## TODO:
-      sleep 5
     end
 
     def public_sleep(sec)

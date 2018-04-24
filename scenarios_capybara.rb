@@ -12,3 +12,4 @@ test.prohib_log_without_creds
 test.prohib_log_with_inc_mail
 test.prohib_log_with_inc_passwd
 test.prohib_log_with_inc_creds
+puts 'tests are successfull'

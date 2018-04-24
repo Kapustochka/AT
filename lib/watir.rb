@@ -1,8 +1,7 @@
 require 'rubygems'
 require 'watir'
 require_relative 'watir_help_methods'
-
-
+# Tests
 class Tests
   include TestMethods
   def initialize

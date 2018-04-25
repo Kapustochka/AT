@@ -3,8 +3,8 @@ require_relative 'lib/watir'
 test = Tests.new
 test.open_page_via_menu
 test.login_with_correct_creds
-# test.login_rememb_creds
-# test.login_rememb_creds_p2
+test.login_rememb_creds # Is prereq. for login_rememb_creds_p2
+test.login_rememb_creds_p2 # Is prereq. for login_rememb_creds_p3
 test.login_rememb_creds_p3
 test.prohib_log_without_passwd
 test.prohib_log_without_mail

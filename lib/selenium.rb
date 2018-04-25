@@ -19,7 +19,6 @@ class Tests
   def tc_02
     @d.get 'http://demoapp.strongqa.com/users/sign_in'
     test_login('admin@strongqa.com', '1234567890')
-    # wait = Selenium::WebDriver::Wait.new(timeout: 5)
     raise 'Wrong URI' unless @wait.until do
       @d.current_url == 'http://demoapp.strongqa.com/'
     end
@@ -42,19 +41,14 @@ class Tests
   alias login_rememb_creds tc_03_01
 
   def tc_03_02
-    tc_03_01
-    # @t.page.driver.browser.close
     @d.execute_script 'window.close();'
-    # @t.page.execute_script 'window.close();'
     @d.get 'http://demoapp.strongqa.com/'
     raise 'Unloggined' unless loginned?
   end
   alias login_rememb_creds_p2 tc_03_02
 
   def tc_03_03
-    tc_03_02
     (@d.find_element link_text: 'Logout').click
-    # @t.page.driver.browser.close
     @d.execute_script 'window.close();'
     @d.get 'http://demoapp.strongqa.com/'
     raise 'Loggined' if loginned?
@@ -66,7 +60,7 @@ class Tests
     test_login('admin@strongqa.com', '')
     # TODO: Ask if it neccessary to reraise custom exception ??
     @wait.until do
-    @d.find_element class_name: 'alert-danger'
+      @d.find_element class_name: 'alert-danger'
     end
   end
   alias prohib_log_without_passwd tc_04_01
@@ -76,7 +70,7 @@ class Tests
     test_login('', '12345678')
     # TODO: Ask if it neccessary to reraise custom exception ??
     @wait.until do
-    @d.find_element class_name: 'alert-danger'
+      @d.find_element class_name: 'alert-danger'
     end
   end
   alias prohib_log_without_mail tc_04_02
@@ -86,7 +80,7 @@ class Tests
     test_login('', '')
     # TODO: Ask if it neccessary to reraise custom exception ??
     @wait.until do
-    @d.find_element class_name: 'alert-danger'
+      @d.find_element class_name: 'alert-danger'
     end
   end
   alias prohib_log_without_creds tc_04_03
@@ -96,7 +90,7 @@ class Tests
     test_login('smaximkalavrenenko@gmail.com', '1234567890')
     # TODO: Ask if it neccessary to reraise custom exception ??
     @wait.until do
-    @d.find_element class_name: 'alert-danger'
+      @d.find_element class_name: 'alert-danger'
     end
   end
   alias prohib_log_with_inc_mail tc_05_01
@@ -106,7 +100,7 @@ class Tests
     test_login('admin@strongqa.com', '123456789')
     # TODO: Ask if it neccessary to reraise custom exception ??
     @wait.until do
-    @d.find_element class_name: 'alert-danger'
+      @d.find_element class_name: 'alert-danger'
     end
   end
   alias prohib_log_with_inc_passwd tc_05_02
@@ -116,7 +110,7 @@ class Tests
     test_login('smaximkalavrenenko@gmail.com', '123456789')
     # TODO: Ask if it neccessary to reraise custom exception ??
     @wait.until do
-    @d.find_element class_name: 'alert-danger'
+      @d.find_element class_name: 'alert-danger'
     end
   end
   alias prohib_log_with_inc_creds tc_05_03

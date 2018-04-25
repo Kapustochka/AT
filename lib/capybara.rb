@@ -101,5 +101,4 @@ class Tests
     @t.find('#flash_alert').text == 'Invalid email or password.'
   end
   alias prohib_log_with_inc_creds tc_05_03
-
 end

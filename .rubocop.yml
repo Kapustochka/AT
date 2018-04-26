@@ -17,3 +17,7 @@ Style/ClassVars:
 Style/GuardClause:
   Exclude:
     - 'lib/help_methods_capybara.rb'
+
+Style/MixinUsage:
+  Exclude:
+    - 'lib/help_methods_capybara.rb'

@@ -25,58 +25,52 @@ module Tests
         check_current_uri('http://demoapp.strongqa.com/users/sign_in')
       end
 
-      tc('tc_02', 'login_with_correct_creds') do |name|
+      tc('tc_02', 'login_with_correct_creds') do
         open_page '/users/sign_in'
         test_login('admin@strongqa.com', '1234567890')
         check_current_uri('http://demoapp.strongqa.com/')
-        assert_page_text(name, 'Signed in successfully.')
+        assert_page_text('Signed in successfully.')
       end
 
-      tc('tc_03', 'logout is working') do |name|
+      tc('tc_03', 'logout is working') do
         click_link_custom('Logout')
-        assert_page_text(name, 'Signed out successfully.')
+        assert_page_text('Signed out successfully.')
       end
 
-      tc('tc_04_1', 'prohib_log_without_passwd') do |name|
+      tc('tc_04_1', 'prohib_log_without_passwd') do
         open_page '/users/sign_in'
         test_login('admin@strongqa.com', '')
-        sleep 1
-        assert_page_text(name, 'Invalid email or password.')
+        assert_page_text('Invalid email or password.')
       end
 
-      tc('tc_04_2', 'prohib_log_without_mail') do |name|
+      tc('tc_04_2', 'prohib_log_without_mail') do
         open_page '/users/sign_in'
         test_login('', '12345678')
-        sleep 1
-        assert_page_text(name, 'Invalid email or password.')
+        assert_page_text('Invalid email or password.')
       end
 
-      tc('tc_04_3', 'prohib_log_without_creds') do |name|
+      tc('tc_04_3', 'prohib_log_without_creds') do
         open_page '/users/sign_in'
         test_login('', '')
-        sleep 1
-        assert_page_text(name, 'Invalid email or password.')
+        assert_page_text('Invalid email or password.')
       end
 
-      tc('tc_05_1', 'prohib_log_with_inc_mail') do |name|
+      tc('tc_05_1', 'prohib_log_with_inc_mail') do
         open_page '/users/sign_in'
         test_login('smaximkalavrenenko@gmail.com', '1234567890')
-        sleep 1
-        assert_page_text(name, 'Invalid email or password.')
+        assert_page_text('Invalid email or password.')
       end
 
-      tc('tc_05_2', 'prohib_log_with_inc_passwd') do |name|
+      tc('tc_05_2', 'prohib_log_with_inc_passwd') do
         open_page '/users/sign_in'
         test_login('admin@strongqa.com', '123456789')
-        sleep 1
-        assert_page_text(name, 'Invalid email or password.')
+        assert_page_text('Invalid email or password.')
       end
 
-      tc('tc_05_3', 'prohib_log_with_inc_creds') do |name|
+      tc('tc_05_3', 'prohib_log_with_inc_creds') do |_name|
         open_page '/users/sign_in'
         test_login('smaximkalavrenenko@gmail.com', '123456789')
-        sleep 1
-        assert_page_text(name, 'Invalid email or password.')
+        assert_page_text('Invalid email or password.')
       end
     end
 

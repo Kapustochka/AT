@@ -19,13 +19,6 @@ module HelpMethods
     click_link(link_name)
   end
 
-  def check_current_uri(uri)
-    puts "Checking if current uri equals #{uri}"
-    sleep 2
-    curr_uri = URI.parse(current_url).to_s
-    raise 'Current page is not that expected' unless curr_uri == uri
-  end
-
   def test_login(login, password)
     puts "Logging in with login=#{login} and password = #{password}"
     fill_in 'Email', with: login
@@ -39,11 +32,16 @@ module HelpMethods
 
   # Checks
 
-  def assert_page_text(name, value)
-    puts "Asserting that page contains #{value}"
-    unless page_text.include?(value)
+  def assert_page_text(value)
+    puts "Asserting that page contains '#{value}'"
+    unless page.has_text?(value)
       puts "#{name}: FAILED"
       raise "\tExpected text '#{page_text}' to include '#{value}'"
     end
+  end
+
+  def check_current_uri(uri)
+    puts "Checking if current uri equals #{uri}"
+    page.assert_current_path(uri)
   end
 end

@@ -1,5 +1,12 @@
 # HelpMethods
 module HelpMethods
+  require 'capybara'
+  require 'capybara/dsl'
+  # require_relative 'help_methods'
+
+  Capybara.run_server = false
+  Capybara.current_driver = :selenium
+  Capybara.app_host = 'http://demoapp.strongqa.com'
   include Capybara::DSL
   # Actions
   def open_page(url)

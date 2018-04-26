@@ -1,14 +1,10 @@
-
+#  Tests
 module Tests
-  require 'capybara'
-  require 'capybara/dsl'
-  require_relative 'help_methods'
-
-  Capybara.run_server = false
-  Capybara.current_driver = :selenium
-  Capybara.app_host = 'http://demoapp.strongqa.com'
-
-  # extend Capybara::DSL
+  if !ARGV[0] || !%w[capybara selenium watir].include?(ARGV[0])
+    ARGV[0] = 'capybara'
+  end
+  p ARGV[0]
+  require_relative "lib/help_methods_#{ARGV[0]}"
   extend HelpMethods
   class << self
     def tc(name, _description)
@@ -23,7 +19,7 @@ module Tests
     end
 
     def tests
-      tc('tc_01', 'open_page_via_menu') do |name|
+      tc('tc_01', 'open_page_via_menu') do
         open_page '/'
         click_link_custom('Login')
         check_current_uri('http://demoapp.strongqa.com/users/sign_in')
@@ -84,7 +80,13 @@ module Tests
       end
     end
 
+    def selenium_demo
+      tc('tc_01', 'open_page_via_menu') do
+        open_page 'http://demoapp.strongqa.com'
+      end
+    end
   end
 end
 
 Tests.tests
+# Tests.selenium_demo

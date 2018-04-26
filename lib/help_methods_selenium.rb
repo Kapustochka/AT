@@ -1,7 +1,5 @@
 require 'selenium-webdriver'
 
-# class with test methods
-
 @d = Selenium::WebDriver.for :firefox
 @d.manage.timeouts.implicit_wait = 30
 @wait = Selenium::WebDriver::Wait.new(timeout: 5)

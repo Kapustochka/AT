@@ -1,5 +1,4 @@
 #  Tests
-# module Tests
 if !ARGV[0] || !%w[capybara selenium watir].include?(ARGV[0])
   ARGV[0] = 'capybara'
 end

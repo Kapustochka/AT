@@ -1,6 +1,6 @@
 #  Tests
-require_relative 'lib/login'
-require_relative 'lib/home'
+
+require_relative 'lib/boot'
 
 Capybara.run_server = false
 Capybara.current_driver = :selenium
@@ -23,14 +23,14 @@ def tests
   tc('tc_01', 'open_page_via_menu') do
     @home_page.load
     @home_page.login_button.click
-    @login_page.displayed?
+    @login_page.displayed_custom
   end
 
   tc('tc_02', 'login_with_correct_creds') do
     # open_page '/users/sign_in'
     @login_page.load
     @login_page.login('admin@strongqa.com', '1234567890')
-    @home_page.displayed?
+    @home_page.displayed_custom
     @home_page.assert_text('Signed in successfully.')
   end
 

@@ -1,7 +1,3 @@
-
-require 'capybara'
-require 'capybara/dsl'
-require 'site_prism'
 # Home page
 class Home < SitePrism::Page
   set_url '/'
@@ -13,6 +9,14 @@ class Home < SitePrism::Page
     puts "Asserting that page contains '#{value}'"
     unless page.has_text?(value)
       raise "\tExpected text '#{page.text}' to include '#{value}'"
+    end
+  end
+
+  def displayed_custom
+    puts 'Checking is it correct page'
+    unless displayed?
+      raise "\tWrong page displayed\nExpected: '/'
+            \nActual#{page.current_url}"
     end
   end
 end

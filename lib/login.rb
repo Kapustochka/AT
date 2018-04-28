@@ -1,8 +1,4 @@
-# Login page
-require 'capybara'
-require 'capybara/dsl'
-require 'site_prism'
-
+# Login Page
 class Login < SitePrism::Page
   set_url '/users/sign_in'
 
@@ -20,6 +16,14 @@ class Login < SitePrism::Page
     puts "Asserting that page contains '#{value}'"
     unless page.has_text?(value)
       raise "\tExpected text '#{page.text}' to include '#{value}'"
+    end
+  end
+
+  def displayed_custom
+    puts 'Checking is it correct page'
+    unless displayed?
+      raise "\tWrong page displayed\nExpected: '/users/sign_in'
+            \nActual #{page.current_url}"
     end
   end
 end

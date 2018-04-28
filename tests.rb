@@ -1,6 +1,6 @@
 #  Tests
 
-require_relative 'lib/boot'
+require_relative 'boot'
 
 Capybara.run_server = false
 Capybara.current_driver = :selenium

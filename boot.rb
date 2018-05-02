@@ -1,6 +1,7 @@
-require 'capybara'
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default)
 require 'capybara/dsl'
-require 'site_prism'
 
 require_relative 'pages/login'
 require_relative 'pages/home'

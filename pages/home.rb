@@ -4,5 +4,4 @@ class Home < SitePrism::Page
 
   element :login_button, :xpath,  '//a[text()="Login"]'
   element :logout_button, :xpath, '//a[text()="Logout"]'
-
 end

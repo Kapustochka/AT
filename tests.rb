@@ -90,7 +90,7 @@ describe '#login' do
   end
 end
 
-describe '#logout_button' do
+describe '#logout' do
   before(:all) do
     @login_page = Login.new
     @home_page = Home.new

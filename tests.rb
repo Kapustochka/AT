@@ -1,118 +1,109 @@
-#  Tests
 require_relative 'boot'
 
-def tc(name, _description)
-  puts name
-  puts '-' * name.size
-  # init_browser
-  yield(name)
-  puts "Test #{name} PASSED"
-rescue StandardError => e
-  puts e.message
-  # reset_browser
-end
+describe '#login' do
+  before(:all) do
+    @login_page = Login.new
+    @home_page = Home.new
+  end
 
-login_page = Login.new
-home_page = Home.new
-# def tests
-tc('tc_01', 'open_page_via_menu') do
-  home_page.load
-  home_page.login_button.click
-  unless login_page.displayed?
-    raise "\tWrong page displayed\nExpected: '/users/sign_in'
-          \nActual #{login_page.current_url}"
+  context 'when open login page' do
+    it 'should be shown login page' do
+      @home_page.load
+      @home_page.login_button.click
+      expect(@login_page).to be_displayed
+    end
+  end
+
+  context 'when creds are correct' do
+    it 'should be logged in and forward to home page' do
+      @login_page.load
+      @login_page.email_field.set 'admin@strongqa.com'
+      @login_page.password_field.set '1234567890'
+      @login_page.login_button.click
+      expect(@home_page).to be_displayed
+      expect(@login_page).to have_content('Signed in successfully.')
+    end
+
+    after(:all) do
+      @home_page.logout_button.click
+    end
+  end
+
+  context 'when password is empty' do
+    it 'shows the error message' do
+      @login_page.load
+      @login_page.email_field.set 'admin@strongqa.com'
+      @login_page.password_field.set ''
+      @login_page.login_button.click
+      expect(@login_page).to have_content('Invalid email or password.')
+    end
+  end
+
+  context 'when email is empty' do
+    it 'shows the error message' do
+      @login_page.load
+      @login_page.email_field.set ''
+      @login_page.password_field.set '1234567890'
+      @login_page.login_button.click
+      expect(@login_page).to have_content('Invalid email or password.')
+    end
+  end
+
+  context 'when login and password are empty' do
+    it 'shows the error message' do
+      @login_page.load
+      @login_page.email_field.set ''
+      @login_page.password_field.set ''
+      @login_page.login_button.click
+      expect(@login_page).to have_content('Invalid email or password.')
+    end
+  end
+
+  context 'when password is wrong' do
+    it 'shows the error message' do
+      @login_page.load
+      @login_page.email_field.set 'admin@strongqa.com'
+      @login_page.password_field.set 'blabla'
+      @login_page.login_button.click
+      expect(@login_page).to have_content('Invalid email or password.')
+    end
+  end
+
+  context 'when login is wrong' do
+    it 'shows the error message' do
+      @login_page.load
+      @login_page.email_field.set 'blablaadmin@strongqa.com'
+      @login_page.password_field.set '1234567890'
+      @login_page.login_button.click
+      expect(@login_page).to have_content('Invalid email or password.')
+    end
+  end
+
+  context 'when password and login are wrong' do
+    it 'shows the error message' do
+      @login_page.load
+      @login_page.email_field.set 'blablaadmin@strongqa.com'
+      @login_page.password_field.set 'blabla1234567890'
+      @login_page.login_button.click
+      expect(@login_page).to have_content('Invalid email or password.')
+    end
   end
 end
 
-tc('tc_02', 'login_with_correct_creds') do
-  login_page.load
-  login_page.email_field.set 'admin@strongqa.com'
-  login_page.password_field.set '1234567890'
-  login_page.login_button.click
-  unless home_page.displayed?
-    raise "\tWrong page displayed\nExpected: '/'
-          \nActual#{home_page.current_url}"
+describe '#logout_button' do
+  before(:all) do
+    @login_page = Login.new
+    @home_page = Home.new
   end
-  unless home_page.has_text?('Signed in successfully.')
-    raise "\tExpected text '#{home_page.text}'
-    to include 'Signed in successfully.'"
-  end
-end
 
-tc('tc_03', 'logout is working') do
-  home_page.logout_button.click
-  unless home_page.has_text?('Signed out successfully.')
-    raise "\tExpected text '#{home_page.text}'
-    to include 'Signed out successfully.'"
+  context 'when logout_button is clicked' do
+    it 'user should be logged off' do
+      @login_page.load
+      @login_page.email_field.set 'admin@strongqa.com'
+      @login_page.password_field.set '1234567890'
+      @login_page.login_button.click
+      @home_page.logout_button.click
+      expect(@home_page).to have_content('Signed out successfully.')
+    end
   end
 end
-
-tc('tc_04_1', 'prohib_log_without_passwd') do
-  login_page.load
-  login_page.email_field.set 'admin@strongqa.com'
-  login_page.password_field.set ''
-  login_page.login_button.click
-  unless login_page.has_text?('Invalid email or password.')
-    raise "\tExpected text '#{login_page.text}'
-    to include 'Invalid email or password.'"
-  end
-end
-
-tc('tc_04_2', 'prohib_log_without_mail') do
-  login_page.load
-
-  login_page.email_field.set ''
-  login_page.password_field.set '12345678'
-  login_page.login_button.click
-  unless login_page.has_text?('Invalid email or password.')
-    raise "\tExpected text '#{login_page.text}'
-    to include 'Invalid email or password.'"
-  end
-end
-
-tc('tc_04_3', 'prohib_log_without_creds') do
-  login_page.load
-  login_page.email_field.set ''
-  login_page.password_field.set ''
-  login_page.login_button.click
-  unless login_page.has_text?('Invalid email or password.')
-    raise "\tExpected text '#{login_page.text}'
-    to include 'Invalid email or password.'"
-  end
-end
-
-tc('tc_05_1', 'prohib_log_with_inc_mail') do
-  login_page.load
-  login_page.email_field.set 'smaximkalavrenenko@gmail.com'
-  login_page.password_field.set '1234567890'
-  login_page.login_button.click
-  unless login_page.has_text?('Invalid email or password.')
-    raise "\tExpected text '#{login_page.text}'
-    to include 'Invalid email or password.'"
-  end
-end
-
-tc('tc_05_2', 'prohib_log_with_inc_passwd') do
-  login_page.load
-  login_page.email_field.set 'admin@strongqa.com'
-  login_page.password_field.set '123456789'
-  login_page.login_button.click
-  unless login_page.has_text?('Invalid email or password.')
-    raise "\tExpected text '#{page.text}'
-    to include 'Invalid email or password.'"
-  end
-end
-
-tc('tc_05_3', 'prohib_log_with_inc_creds') do
-  login_page.load
-  login_page.email_field.set 'smaximkalavrenenko@gmail.com'
-  login_page.password_field.set '123456789'
-  login_page.login_button.click
-  unless login_page.has_text?('Invalid email or password.')
-    raise "\tExpected text '#{page.text}'
-    to include 'Invalid email or password.'"
-  end
-end
-# end
-
-# tests

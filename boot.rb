@@ -1,3 +1,4 @@
+# require_relative '../boot'
 require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)

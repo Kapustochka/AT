@@ -1,11 +1,11 @@
-require_relative  'spec_helper'
+require_relative 'spec_helper'
 
-RSpec.describe 'Logging out' do
-  describe 'User' do
-    let(:login_page) { Login.new }
-    let(:home_page) { Home.new }
+RSpec.feature 'Logging out' do
+  feature 'User' do
+    given(:login_page) { Login.new }
+    given(:home_page) { Home.new }
 
-    it 'can log off' do
+    scenario 'can log off' do
       login_page.load
       login_page.email_field.set 'admin@strongqa.com'
       login_page.password_field.set '1234567890'

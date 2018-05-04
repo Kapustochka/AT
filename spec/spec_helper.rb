@@ -1,4 +1,16 @@
-require_relative '../boot'
+# require_relative '../boot'
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default)
+require 'capybara/dsl'
+require 'capybara/rspec'
+
+require_relative '../pages/login'
+require_relative '../pages/home'
+
+Capybara.run_server = false
+Capybara.default_driver = :selenium
+Capybara.app_host = 'http://demoapp.strongqa.com'
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

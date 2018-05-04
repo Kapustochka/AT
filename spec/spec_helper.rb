@@ -3,17 +3,13 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
 require 'capybara/dsl'
-
 require 'capybara/rspec'
-
 require_relative '../pages/login'
 require_relative '../pages/home'
-
 
 Capybara.run_server = false
 Capybara.default_driver = :selenium
 Capybara.app_host = 'http://demoapp.strongqa.com'
-
 
 Dir.glob('spec/steps/**/*steps.rb') { |f| load f, true }
 

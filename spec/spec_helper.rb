@@ -1,4 +1,18 @@
-require_relative '../boot'
+# require_relative '../boot'
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default)
+require 'capybara/dsl'
+# require 'capybara/rspec'
+# require 'turnip/capybara'
+require_relative '../pages/login'
+require_relative '../pages/home'
+# require_relative 'spec/steps/user_login_steps'
+
+Capybara.run_server = false
+Capybara.default_driver = :selenium
+Capybara.app_host = 'http://demoapp.strongqa.com'
+
 Dir.glob('spec/steps/**/*steps.rb') { |f| load f, true }
 
 RSpec.configure do |config|

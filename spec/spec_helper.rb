@@ -1,3 +1,6 @@
+require_relative '../boot'
+Dir.glob('spec/steps/**/*steps.rb') { |f| load f, true }
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -9,5 +12,5 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.expose_dsl_globally = false
+  # config.include UserLoginSteps
 end
-require_relative '../boot'

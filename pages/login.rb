@@ -1,4 +1,3 @@
-# Login Page
 class Login < SitePrism::Page
   set_url '/users/sign_in'
 

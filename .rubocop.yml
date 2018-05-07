@@ -1,23 +1,13 @@
-# Offense count: 1
-Metrics/AbcSize:
-  Max: 42
+AllCops:
+  TargetRubyVersion: 2.4
+  ExtraDetails: true
+  DisplayCopNames: true
+  DisplayStyleGuide: true
 
-# Offense count: 1
-# Configuration parameters: CountComments.
-Metrics/MethodLength:
-  Max: 51
 
-# Offense count: 2
-Style/ClassVars:
-  Exclude:
-    - 'lib/help_methods_selenium.rb'
-
-# Offense count: 1
-# Configuration parameters: MinBodyLength.
-Style/GuardClause:
-  Exclude:
-    - 'lib/help_methods_capybara.rb'
-
-Style/MixinUsage:
-  Exclude:
-    - 'lib/help_methods_capybara.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false

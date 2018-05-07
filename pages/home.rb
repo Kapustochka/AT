@@ -1,4 +1,3 @@
-# Home page
 class Home < SitePrism::Page
   set_url '/'
 

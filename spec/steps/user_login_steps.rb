@@ -19,20 +19,39 @@ module UserLoginSteps
   end
   # When
   step 'I click login button' do
-    @home_page.login_button.click
     if @login_page.displayed?
       @login_page.login_button.click
     elsif @home_page.displayed?
       @home_page.login_button.click
     end
   end
-# Then
+
+  step 'I click logout button' do
+    @home_page.logout_button.click
+  end
+
+  step 'I fill in email field with :email' do |email|
+    @login_page.email_field.set email
+  end
+
+  step 'I fill in password field with :password' do |password|
+    @login_page.password_field.set password
+  end
+
+  # Then
   step ':page page is displayed' do |page|
-    @home_page.login_button.click
     if page =~ /login/i
       expect(@login_page).to be_displayed
     elsif page =~ /home/i
       expect(@home_page).to be_displayed
+    end
+  end
+
+  step ':page page has content :content' do |page, content|
+    if page =~ /login/i
+      expect(@login_page).to have_content(content)
+    elsif page =~ /home/i
+      expect(@home_page).to have_content(content)
     end
   end
 end

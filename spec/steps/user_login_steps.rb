@@ -47,35 +47,35 @@ module UserLoginSteps
   end
 
   step 'user logs in with correct creds' do
-    send 'user fills in email field with :email', correct_email #'admin@strongqa.com'
-    send 'user fills in password field with :password', correct_pass #'1234567890'
+    send 'user fills in email field with :email', correct_email
+    send 'user fills in password field with :password', correct_pass
     send 'user clicks login button'
   end
 
   step 'user logs in with incorrect :cred' do |cred|
     if cred.match?(/passw/i)
-      send 'user fills in email field with :email',correct_email #'admin@strongqa.com'
-      send 'user fills in password field with :password', incorrect_pass #'blabla'
+      send 'user fills in email field with :email', correct_email
+      send 'user fills in password field with :password', incorrect_pass
       send 'user clicks login button'
     elsif cred.match?(/email/i)
-      send 'user fills in email field with :email', incorrect_email #'blablaadmin@strongqa.com'
-      send 'user fills in password field with :password', correct_pass #'1234567890'
+      send 'user fills in email field with :email', incorrect_email
+      send 'user fills in password field with :password', correct_pass
       send 'user clicks login button'
     elsif cred.match?(/both/i)
-      send 'user fills in email field with :email', incorrect_email #'2blablaadmin@strongqa.com'
-      send 'user fills in password field with :password', incorrect_pass #'blabla1234567890'
+      send 'user fills in email field with :email', incorrect_email
+      send 'user fills in password field with :password', incorrect_pass
       send 'user clicks login button'
     end
   end
 
   step 'user logs in with blank :cred' do |cred|
     if cred.match?(/passw/i)
-      send 'user fills in email field with :email', correct_email #'admin@strongqa.com'
+      send 'user fills in email field with :email', correct_email
       send 'user fills in password field with :password', ''
       send 'user clicks login button'
     elsif cred.match?(/email/i)
       send 'user fills in email field with :email', ''
-      send 'user fills in password field with :password', correct_pass  #'1234567890'
+      send 'user fills in password field with :password', correct_pass
       send 'user clicks login button'
     elsif cred.match?(/both/i)
       send 'user fills in email field with :email', ''
@@ -102,6 +102,7 @@ module UserLoginSteps
     end
   end
 end
+
 placeholder :cred do
   match(/(passw.*email.*)|(email.*passw.*)/) do
     'both'

@@ -7,6 +7,7 @@ Feature: User's signing in
     When user clicks login button on home page
     Then login page should be displayed
 
+  @logoutable
   Scenario: User logs in with correct creds directly
     Given user is on login page
     When user logs in with correct creds

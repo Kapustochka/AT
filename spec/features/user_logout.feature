@@ -7,4 +7,4 @@ Feature: User's signing out
     When user logs in with correct creds
     And user clicks logout button
     Then home page should be displayed
-    And home page should have content 'Signed out successfully.'
+    And user should see alert about successfull sign out

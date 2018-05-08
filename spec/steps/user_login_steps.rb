@@ -79,14 +79,6 @@ module UserLoginSteps
     expect(login_page).to be_displayed
   end
 
-  step 'home page should have content :content' do |content|
-    expect(home_page).to have_content(content)
-  end
-
-  step 'login page should have content :content' do |content|
-    expect(login_page).to have_content(content)
-  end
-
   step 'user should see alert about successfull sign in' do
     expect(home_page).to have_content('Signed in successfully.')
   end

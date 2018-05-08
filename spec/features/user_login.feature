@@ -2,13 +2,9 @@ Feature: User's signing in
   In order to be authorised
   Users should be able to sign in
 
-  Background:
-    Given there is a home page
-    And there is a login page
-
   Scenario: User opens login page via menu
     Given user is on home page
-    When user clicks login button
+    When user clicks login button on home page
     Then login page should be displayed
 
   Scenario: User logs in with correct creds directly
@@ -49,6 +45,6 @@ Feature: User's signing in
 
   Scenario: User logs in with incorrect email and password
     Given user is on login page
-    When user logs in with incorrect password and email
+    When user logs in with incorrect email and password
     Then login page should be displayed
     And home page should have content 'Invalid email or password.'

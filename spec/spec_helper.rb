@@ -1,4 +1,3 @@
-# require_relative '../boot'
 require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
@@ -6,10 +5,7 @@ require 'capybara/dsl'
 require 'capybara/rspec'
 require_relative '../pages/login'
 require_relative '../pages/home'
-
-Capybara.run_server = false
-Capybara.default_driver = :selenium
-Capybara.app_host = 'http://demoapp.strongqa.com'
+require_relative 'support/capybara'
 
 Dir.glob('spec/steps/**/*steps.rb') { |f| load f, true }
 
@@ -24,5 +20,4 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.expose_dsl_globally = false
-  # config.include UserLoginSteps
 end

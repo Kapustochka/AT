@@ -2,10 +2,6 @@ Feature: User's signing out
   In order to save their data
   Users should be able to sign out
 
-  Background:
-    Given there is a home page
-    And there is a login page
-
   Scenario: User logs out after logging in
     Given user is on login page
     When user logs in with correct creds

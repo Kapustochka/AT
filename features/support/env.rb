@@ -3,11 +3,9 @@ require 'bundler/setup'
 Bundler.require(:default)
 require 'capybara/dsl'
 require 'capybara/rspec'
-require_relative '../pages/login'
-require_relative '../pages/home'
-require_relative 'support/capybara'
-
-Dir.glob('spec/steps/**/*steps.rb') { |f| load f, true }
+require_relative '../../pages/login'
+require_relative '../../pages/home'
+require_relative 'capybara'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
